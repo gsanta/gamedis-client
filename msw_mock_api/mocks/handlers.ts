@@ -10,29 +10,9 @@ export const handlers = [
 
     return res(ctx.json(sprite));
   }),
-  rest.get('/api/sprite/search', async (_req, res, ctx) => {
+  rest.get('/api/v1/sprite_sheet', async (_req, res, ctx) => {
     const sprites = spritesJson.sprites;
 
-    console.log('the sprites', sprites);
-
-    // return res(ctx.json(sprites));
-
-    return res(
-      ctx.status(500),
-      ctx.json({
-        errorMessage: `Internal server error`,
-      }),
-    );
-    // And a response body, if necessary
-
-    // const url = 'sprites/player.png';
-
-    // const imageBuffer = await fetch(url).then((imgRes) => imgRes.arrayBuffer());
-    // return res(
-    //   ctx.set('Content-Length', imageBuffer.byteLength.toString()),
-    //   ctx.set('Content-Type', 'image/png'),
-    //   // Respond with the "ArrayBuffer".
-    //   ctx.body(imageBuffer),
-    // );
+    return res(ctx.json(sprites));
   }),
 ];
