@@ -4,5 +4,4 @@ services:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && npm t"
     volumes:
-      - .:/myapp:delegated
-      - ./node_modules:/myapp/node_modules
+      - .:/myapp
