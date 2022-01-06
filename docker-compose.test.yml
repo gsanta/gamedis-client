@@ -2,6 +2,6 @@ version: "3.3"
 services:
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && npm t"
+    command: bash -c "rm -f tmp/pids/server.pid && npm install && npm t"
     volumes:
       - .:/myapp
