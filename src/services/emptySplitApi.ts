@@ -25,17 +25,8 @@ const axiosBaseQuery =
 
 const emptySplitApi = createApi({
   reducerPath: 'spriteApi',
-  baseQuery: axiosBaseQuery({ baseUrl: '.' }),
-  endpoints: (builder) => ({
-    getSpriteByName: builder.query<AxiosResponse<Sprite>, string>({
-      query: (name) => ({ url: `/api/sprite/${name}`, method: 'get' }),
-    }),
-    searchSprites: builder.query<SpriteSheet[], void>({
-      query: () => ({ url: `/api/v1/sprite_sheet`, method: 'get' }),
-    }),
-  }),
+  baseQuery: axiosBaseQuery({ baseUrl: '/api/v1/' }),
+  endpoints: () => ({}),
 });
 
 export default emptySplitApi;
-
-// export const { useGetSpriteByNameQuery, useSearchSpritesQuery } = emptySplitApi;
