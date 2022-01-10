@@ -1,7 +1,5 @@
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
-import { SpriteSheet } from '../features/sprite/SpriteSheet';
-import { Sprite } from '../models/Sprite';
-import axios, { AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 type Args = {
   url: string;
@@ -11,7 +9,8 @@ type Args = {
 
 const axiosBaseQuery =
   ({ baseUrl }: { baseUrl: string } = { baseUrl: '' }): BaseQueryFn<Args, unknown, unknown> =>
-  async ({ url, method, data }: any) => {
+  async (args: Args) => {
+    const { url, method, data } = args;
     try {
       const result = await axios({ url: baseUrl + url, method, data });
       return { data: result.data };

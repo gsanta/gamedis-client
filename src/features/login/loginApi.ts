@@ -8,11 +8,14 @@ export interface UserDto {
 const loginApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<unknown, UserDto>({
-      query: (arg) => ({
-        url: 'auth/login',
-        method: 'post',
-        body: { user: arg },
-      }),
+      query: (arg) => {
+        debugger;
+        return {
+          url: 'auth/login',
+          method: 'post',
+          data: { user: arg },
+        }
+      }
     }),
   }),
   overrideExisting: false,
