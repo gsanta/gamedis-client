@@ -2,7 +2,18 @@
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const fs = require('fs');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+// TODO: no better solution?
+const srcPath = (subdir) => path.join(__dirname, 'src', subdir);
+const getFilesAndDirectories = (source) => fs.readdirSync(source, { withFileTypes: true }).map((dirent) => dirent.name);
+let absoluteImports = {};
+getFilesAndDirectories('src').forEach((fileName) => {
+  const fileNameWithoutExtension = path.parse(fileName).name;
+  absoluteImports[`@/${fileNameWithoutExtension}`] = srcPath(fileName);
+});
 
 module.exports = (env) => {
   return {
@@ -60,6 +71,9 @@ module.exports = (env) => {
     ],
     resolve: {
       extensions: ['.tsx', '.ts', '.js', 'scss', '.css'],
+      alias: {
+        ...absoluteImports,
+      },
     },
     output: {
       filename: 'bundle.js',

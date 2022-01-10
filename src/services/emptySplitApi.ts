@@ -23,7 +23,7 @@ const axiosBaseQuery =
     }
   };
 
-export const spriteApi = createApi({
+const emptySplitApi = createApi({
   reducerPath: 'spriteApi',
   baseQuery: axiosBaseQuery({ baseUrl: '.' }),
   endpoints: (builder) => ({
@@ -36,4 +36,6 @@ export const spriteApi = createApi({
   }),
 });
 
-export const { useGetSpriteByNameQuery, useSearchSpritesQuery } = spriteApi;
+export default emptySplitApi;
+
+// export const { useGetSpriteByNameQuery, useSearchSpritesQuery } = emptySplitApi;

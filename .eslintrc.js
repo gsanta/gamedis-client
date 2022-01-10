@@ -100,6 +100,7 @@ module.exports = {
   ],
   rules: {
     /*** Import related rules ***/
+    'import/extensions': 'off',
     'import/no-extraneous-dependencies': [
       'error',
       {

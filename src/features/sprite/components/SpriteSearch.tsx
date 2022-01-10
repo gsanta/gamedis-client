@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useSearchSpritesQuery } from '../../../services/spriteApi';
-import { addNotificationAction } from '../../notification/notificationReducer';
+import { addNotificationAction } from '@/features/notification/notificationReducer';
+import { useSearchSpritesQuery } from '../spriteApi';
 
 const SpriteSearch = () => {
   const { data, error, isLoading } = useSearchSpritesQuery();

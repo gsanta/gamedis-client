@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import spriteReducer, { SpriteReducerState } from '../reducers/spriteReducer';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { spriteApi } from '../services/spriteApi';
+import emptySplitApi from '../services/emptySplitApi';
 import engineReducer, { EngineReducerState } from '../engine/engineReducer';
 import notificationReducer from '../features/notification/notificationReducer';
 import loginReducer from '../features/login/loginReducer';
@@ -17,9 +17,9 @@ const store = configureStore({
     engine: engineReducer,
     notification: notificationReducer,
     login: loginReducer,
-    [spriteApi.reducerPath]: spriteApi.reducer,
+    [emptySplitApi.reducerPath]: emptySplitApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(spriteApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(emptySplitApi.middleware),
 });
 
 setupListeners(store.dispatch);
