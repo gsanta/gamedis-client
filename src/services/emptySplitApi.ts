@@ -1,5 +1,6 @@
+import { SerializedError } from '@reduxjs/toolkit';
 import { BaseQueryFn, createApi } from '@reduxjs/toolkit/query/react';
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 type Args = {
   url: string;
@@ -8,16 +9,16 @@ type Args = {
 };
 
 const axiosBaseQuery =
-  ({ baseUrl }: { baseUrl: string } = { baseUrl: '' }): BaseQueryFn<Args, unknown, unknown> =>
+  ({ baseUrl }: { baseUrl: string } = { baseUrl: '' }): BaseQueryFn<Args, unknown, SerializedError | undefined> =>
   async (args: Args) => {
     const { url, method, data } = args;
     try {
       const result = await axios({ url: baseUrl + url, method, data });
-      return { data: result.data };
+      return { data: result.data, meta: { response: result } };
     } catch (axiosError) {
       const err = axiosError as AxiosError;
       return {
-        error: { status: err.response?.status, data: err.response?.data },
+        error: { code: err.response?.status + '', message: err.response?.data?.error },
       };
     }
   };
