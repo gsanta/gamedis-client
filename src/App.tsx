@@ -13,25 +13,31 @@ import Notifications from './features/notification/Notifications';
 import Header from './layout/Header';
 import LoginDialog from './features/login/LoginDialog';
 
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
+
 const App = (): JSX.Element => {
   return (
     <React.StrictMode>
-      <Provider store={store}>
-        <Header />
-        <ReflexContainer orientation="vertical" style={{ height: 'calc(100% - 51px)' }}>
-          <ReflexElement className="left-pane">
-            <SidePanel />
-          </ReflexElement>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <Header />
+          <ReflexContainer orientation="vertical" style={{ height: 'calc(100% - 51px)' }}>
+            <ReflexElement className="left-pane">
+              <SidePanel />
+            </ReflexElement>
 
-          <ReflexSplitter />
+            <ReflexSplitter />
 
-          <ReflexElement className="right-pane">
-            <RenderCanvas />
-          </ReflexElement>
-        </ReflexContainer>
-        <Notifications />
-        <LoginDialog />
-      </Provider>
+            <ReflexElement className="right-pane">
+              <RenderCanvas />
+            </ReflexElement>
+          </ReflexContainer>
+          <Notifications />
+          <LoginDialog />
+        </Provider>
+      </QueryClientProvider>
     </React.StrictMode>
   );
 };

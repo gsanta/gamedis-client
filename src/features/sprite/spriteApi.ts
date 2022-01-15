@@ -1,18 +1,31 @@
-import emptySplitApi from '@/services/emptySplitApi';
-import { AxiosResponse } from 'axios';
-import { Sprite } from 'babylonjs';
+import useApiQuery from '../../hooks/useApiQuery';
 import { SpriteSheet } from './SpriteSheet';
 
-const spriteApi = emptySplitApi.injectEndpoints({
-  endpoints: (builder) => ({
-    getSpriteByName: builder.query<AxiosResponse<Sprite>, string>({
-      query: (name) => ({ url: `sprite/${name}`, method: 'get' }),
-    }),
-    searchSprites: builder.query<SpriteSheet[], void>({
-      query: () => ({ url: `sprite_sheet`, method: 'get' }),
-    }),
-  }),
-  overrideExisting: false,
-});
+const useGetSpriteByName = (name: string) => {
+  return useApiQuery(['sprite', name], `v1/sprite_sheet/${name}`);
+};
 
-export const { useGetSpriteByNameQuery, useSearchSpritesQuery } = spriteApi;
+const useSearchSprites = () => {
+  return useApiQuery<SpriteSheet[], unknown>(['sprites'], `v1/sprite_sheet`);
+};
+
+const spriteApi = {
+  useGetSpriteByName,
+  useSearchSprites,
+};
+
+export default spriteApi;
+
+// const spriteApi = emptySplitApi.injectEndpoints({
+//   endpoints: (builder) => ({
+//     getSpriteByName: builder.query<AxiosResponse<Sprite>, string>({
+//       query: (name) => ({ url: `sprite/${name}`, method: 'get' }),
+//     }),
+//     searchSprites: builder.query<SpriteSheet[], void>({
+//       query: () => ({ url: `sprite_sheet`, method: 'get' }),
+//     }),
+//   }),
+//   overrideExisting: false,
+// });
+
+// export const { useGetSpriteByNameQuery, useSearchSpritesQuery } = spriteApi;

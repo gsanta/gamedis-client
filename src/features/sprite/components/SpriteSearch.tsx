@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addNotificationAction } from '@/features/notification/notificationReducer';
-import { useSearchSpritesQuery } from '../spriteApi';
+import spriteApi from '../spriteApi';
 
 const SpriteSearch = () => {
-  const { data, error, isLoading } = useSearchSpritesQuery();
+  const { data, error, isLoading } = spriteApi.useSearchSprites();
   // const { data, error, isLoading } = useGetSpriteByNameQuery('player');
   const dispatch = useDispatch();
 
@@ -13,9 +13,6 @@ const SpriteSearch = () => {
   if (error) {
     dispatch({ type: addNotificationAction.type, payload: 'Failed to load sprites.' });
   }
-
-  // const info = () => {
-  // };
 
   if (data) {
     result = (

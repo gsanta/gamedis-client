@@ -1,10 +1,9 @@
 import TextBlock from '@/layout/TextBlock';
-import { QueryStatus } from '@reduxjs/toolkit/dist/query';
 import { Form, Input, Modal } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../ui/store';
-import { useLoginMutation } from './loginApi';
+import loginApi from './loginApi';
 import { openLoginDialog } from './loginReducer';
 
 const formItemLayout = {
@@ -19,16 +18,16 @@ const LoginDialog = () => {
   const isOpen = useSelector((state: RootState) => state.login.isDialogOpen);
   const closeDialog = () => dispatch({ type: openLoginDialog.type, payload: false });
 
-  const [triggerLogin, { status, error }] = useLoginMutation();
+  const { mutate, error, isSuccess } = loginApi.useLogin();
 
-  if (status === QueryStatus.fulfilled) {
+  if (isSuccess) {
     closeDialog();
   }
 
   const onSubmit = async () => {
     try {
       const { email, password } = await form.validateFields();
-      triggerLogin({ email, password });
+      mutate({ user: { email, password } });
     } catch (errorInfo) {
       console.log('Failed:', errorInfo);
     }
