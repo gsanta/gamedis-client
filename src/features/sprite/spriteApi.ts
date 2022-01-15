@@ -1,12 +1,12 @@
-import useApiQuery from '../../hooks/useApiQuery';
+import { useAuthorizedApiQuery } from '../../hooks/useApiQuery';
 import { SpriteSheet } from './SpriteSheet';
 
 const useGetSpriteByName = (name: string) => {
-  return useApiQuery(['sprite', name], `v1/sprite_sheet/${name}`);
+  return useAuthorizedApiQuery(['sprite', name], `v1/sprite_sheet/${name}`);
 };
 
 const useSearchSprites = () => {
-  return useApiQuery<SpriteSheet[], unknown>(['sprites'], `v1/sprite_sheet`);
+  return useAuthorizedApiQuery<SpriteSheet[], unknown>(['sprites'], `v1/sprite_sheet`);
 };
 
 const spriteApi = {

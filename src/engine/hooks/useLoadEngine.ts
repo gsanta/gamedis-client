@@ -1,11 +1,11 @@
 import { Engine, Scene, SceneLoader, ArcRotateCamera, Vector3, HemisphericLight } from 'babylonjs';
 import { Dispatch, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ReducersState } from '../../ui/store';
+import { RootState } from '../../ui/store';
 import ActionTypes from '../actionTypes';
 import engineStore from '../EngineStore';
 
-const selectEngine = (state: ReducersState) => state.engine;
+const selectEngine = (state: RootState) => state.engine;
 
 const createScene = function (engine: Engine, canvas: HTMLCanvasElement) {
   const scene = new Scene(engine);

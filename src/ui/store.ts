@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import spriteReducer, { SpriteReducerState } from '../reducers/spriteReducer';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import engineReducer, { EngineReducerState } from '../engine/engineReducer';
-import notificationReducer from '../features/notification/notificationReducer';
+import engineReducer from '../engine/engineReducer';
 import loginReducer from '../features/login/loginReducer';
+import notificationReducer from '../features/notification/notificationReducer';
+import spriteReducer from '../reducers/spriteReducer';
+import userReducer from '../user/userReducer';
 
-export interface ReducersState {
-  sprite: SpriteReducerState;
-  engine: EngineReducerState;
-}
+// export interface ReducersState {
+//   sprite: SpriteReducerState;
+//   engine: EngineReducerState;
+// }
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     engine: engineReducer,
     notification: notificationReducer,
     login: loginReducer,
+    user: userReducer,
   },
 });
 

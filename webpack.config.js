@@ -56,8 +56,10 @@ module.exports = (env) => {
       new MiniCssExtractPlugin({
         filename: 'bundle.css',
       }),
+      // new webpack.EnvironmentPlugin(['BACKEND_TYPE']),
       new webpack.DefinePlugin({
         DEBUG: env === 'debug' ? true : false,
+        BACKEND_TYPE: JSON.stringify(process.env.BACKEND_TYPE),
       }),
       // new BundleAnalyzerPlugin({
       //     analyzerPort: 8887

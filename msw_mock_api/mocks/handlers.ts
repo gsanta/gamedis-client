@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import { LoginResponseDto } from '../../src/features/login/loginApi';
 import spritesJson from '../jsons/sprites.json';
 
 const token =
@@ -16,12 +17,26 @@ interface UserRequest {
   };
 }
 
+const isAuthorized = (req: Request) => {
+  const authHeader = req.headers.get('Authorization');
+
+  return authHeader?.endsWith(token);
+};
+
 export const handlers = [
   rest.post<UserRequest>('/api/v1/auth/login', async (req, res, ctx) => {
     const { user } = req.body;
 
     if (user.email === testUser.email && user.password === testUser.password) {
-      return res(ctx.json('successful login'));
+      const header = ctx.set('Authorization', `Bearer ${token}`);
+      const loginResponse: LoginResponseDto = {
+        data: {
+          attributes: {
+            email: user.email,
+          },
+        },
+      };
+      return res(header, ctx.json(loginResponse));
     } else {
       return res(ctx.json('not successful login'));
     }
@@ -29,7 +44,6 @@ export const handlers = [
 
   rest.get('/api/sprite/name/:spriteName', async (req, res, ctx) => {
     const { spriteName } = req.params;
-    console.log('the sprites', spritesJson.sprites);
 
     const sprite = spritesJson.sprites.find((s) => s.name === spriteName);
 
@@ -38,6 +52,10 @@ export const handlers = [
 
   rest.get('/api/v1/sprite_sheet', async (_req, res, ctx) => {
     const sprites = spritesJson.sprites;
+
+    if (!isAuthorized) {
+      return res(ctx.status(401), ctx.json('Login required.'));
+    }
 
     return res(ctx.json(sprites));
   }),
