@@ -17,7 +17,11 @@ getFilesAndDirectories('src').forEach((fileName) => {
 
 module.exports = (env) => {
   return {
-    entry: './src/index.tsx',
+    entry: {
+      app: './src/index.tsx',
+      game: './src/game/index.tsx',
+      Visibility2d: './src/game/features/visibility_2d/Visibility2d.tsx',
+    },
     module: {
       rules: [
         {
@@ -53,8 +57,9 @@ module.exports = (env) => {
       ],
     },
     plugins: [
+      new webpack.HotModuleReplacementPlugin({}),
       new MiniCssExtractPlugin({
-        filename: 'bundle.css',
+        filename: '[name].css',
       }),
       // new webpack.EnvironmentPlugin(['BACKEND_TYPE']),
       new webpack.DefinePlugin({
@@ -64,11 +69,23 @@ module.exports = (env) => {
       // new BundleAnalyzerPlugin({
       //     analyzerPort: 8887
       // }),
-      new webpack.optimize.LimitChunkCountPlugin({
-        maxChunks: 1,
-      }),
+      // new webpack.optimize.LimitChunkCountPlugin({
+      //   maxChunks: 1,
+      // }),
       new HtmlWebpackPlugin({
         template: 'index.html',
+        filename: 'index.html',
+        inject: false,
+      }),
+      new HtmlWebpackPlugin({
+        template: 'game.html',
+        filename: 'game.html',
+        inject: false,
+      }),
+      new HtmlWebpackPlugin({
+        template: 'visibility.html',
+        filename: 'visibility.html',
+        inject: false,
       }),
     ],
     resolve: {
@@ -78,14 +95,16 @@ module.exports = (env) => {
       },
     },
     output: {
-      filename: 'bundle.js',
-      libraryTarget: 'var',
-      library: 'gameDesigner',
+      filename: '[name].js',
     },
     externals: {
       babylonjs: 'BABYLON',
     },
     devtool: 'eval',
+    mode: 'development',
+    optimization: {
+      usedExports: true,
+    },
     context: __dirname,
     devServer: {
       static: ['.', './test', './assets', './public'],

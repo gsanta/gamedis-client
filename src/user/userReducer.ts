@@ -1,11 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
-import authStore from '../features/login/authStore';
-import store from '../ui/store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import authStore, { UserAuthData } from '../features/login/authStore';
 
 interface UserReducerState {
   isLoggedIn: boolean;
-  token?: string;
-  email?: string;
+  auth?: UserAuthData;
 }
 
 const initialUserData = authStore.getUser();
@@ -19,12 +17,19 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state, action) {
-      const { token, email } = action.payload;
-      if (token) {
-        state.token = token;
-        state.email = email;
-      }
+    setUser: {
+      reducer: (state, action: PayloadAction<UserAuthData | null>) => {
+        state = { ...state, ...(action.payload || {}) };
+      },
+      prepare: (payload: UserAuthData | null) => {
+        if (payload) {
+          authStore.setUser({ token: payload.token, email: payload.email });
+        } else {
+          authStore.clearUser();
+        }
+
+        return { payload };
+      },
     },
   },
 });

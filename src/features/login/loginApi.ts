@@ -1,9 +1,7 @@
 import { AxiosResponse } from 'axios';
-import { useDispatch } from 'react-redux';
 import useApiMutation from '../../hooks/useApiMutation';
 import store from '../../ui/store';
 import { userActions } from '../../user/userReducer';
-import authStore from './authStore';
 
 export interface LoginRequestDto {
   email: string;
@@ -24,7 +22,6 @@ const onLoginSuccess = (data: AxiosResponse<LoginResponseDto>) => {
   if (data && authData?.length === 2) {
     const { email } = data?.data?.data?.attributes;
     const token = authData[1];
-    authStore.setUser({ email, token });
     store.dispatch({ type: userActions.setUser, payload: { token, email } });
   }
 };

@@ -1,5 +1,4 @@
-
-type UserAuthData = {
+export type UserAuthData = {
   token: string;
   email: string;
 };

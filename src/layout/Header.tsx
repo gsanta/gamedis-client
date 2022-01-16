@@ -1,21 +1,21 @@
 import { Button, PageHeader } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import loginApi from '../features/login/loginApi';
 import { openLoginDialog } from '../features/login/loginReducer';
 import { RootState } from '../ui/store';
+import { userActions } from '../user/userReducer';
 
 const selectUser = (state: RootState) => state.user;
 
 const Header = () => {
-  const { isLoggedIn, email } = useSelector(selectUser);
+  const { isLoggedIn, auth } = useSelector(selectUser);
   const dispatch = useDispatch();
   const openLogin = () => dispatch({ type: openLoginDialog.type, payload: true });
-  const logout = loginApi.
+  const logout = () => dispatch(userActions.setUser(null));
 
   const loggedInHeader = (
     <>
-      Hi {email}! <Button onClick={openLogin}>Log out</Button>
+      Hi {auth?.email}! <Button onClick={logout}>Log out</Button>
     </>
   );
 
