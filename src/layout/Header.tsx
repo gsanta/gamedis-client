@@ -1,16 +1,16 @@
 import { Button, PageHeader } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { openLoginDialog } from '../features/login/loginReducer';
+import { loginActions } from '../features/login/loginReducer';
 import { RootState } from '../ui/store';
 import { userActions } from '../user/userReducer';
 
 const selectUser = (state: RootState) => state.user;
 
 const Header = () => {
-  const { isLoggedIn, auth } = useSelector(selectUser);
+  const { auth } = useSelector(selectUser);
   const dispatch = useDispatch();
-  const openLogin = () => dispatch({ type: openLoginDialog.type, payload: true });
+  const openLogin = () => dispatch(loginActions.openLoginDialog(true));
   const logout = () => dispatch(userActions.setUser(null));
 
   const loggedInHeader = (
@@ -21,7 +21,7 @@ const Header = () => {
 
   const loggedOutHeader = <Button onClick={openLogin}>Log in</Button>;
 
-  const login = isLoggedIn ? loggedInHeader : loggedOutHeader;
+  const login = auth?.token ? loggedInHeader : loggedOutHeader;
 
   return <PageHeader className="site__header" onBack={() => null} title="Game Designer" extra={login}></PageHeader>;
 };

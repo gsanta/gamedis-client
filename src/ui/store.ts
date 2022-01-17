@@ -6,11 +6,6 @@ import notificationReducer from '../features/notification/notificationReducer';
 import spriteReducer from '../reducers/spriteReducer';
 import userReducer from '../user/userReducer';
 
-// export interface ReducersState {
-//   sprite: SpriteReducerState;
-//   engine: EngineReducerState;
-// }
-
 const store = configureStore({
   reducer: {
     sprite: spriteReducer,

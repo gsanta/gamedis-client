@@ -2,9 +2,11 @@ import TextBlock from '@/layout/TextBlock';
 import { Form, Input, Modal } from 'antd';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import useApiMutation from '../../hooks/useApiMutation';
 import { RootState } from '../../ui/store';
-import loginApi from './loginApi';
-import { openLoginDialog } from './loginReducer';
+import { userActions } from '../../user/userReducer';
+import { LoginResponseDto } from './loginApi';
+import { loginActions } from './loginReducer';
 
 const formItemLayout = {
   labelCol: { span: 4 },
@@ -16,9 +18,16 @@ const LoginDialog = () => {
   const [form] = Form.useForm();
 
   const isOpen = useSelector((state: RootState) => state.login.isDialogOpen);
-  const closeDialog = () => dispatch({ type: openLoginDialog.type, payload: false });
+  const closeDialog = () => dispatch(loginActions.openLoginDialog(false));
 
-  const { mutate, error, isSuccess } = loginApi.useLogin();
+  const { mutate, error, isSuccess } = useApiMutation<LoginResponseDto>('v1/auth/login', 'post', {
+    onSuccess(data) {
+      const authHeader = data?.headers.authorization;
+      const { email } = data?.data?.data?.attributes;
+
+      dispatch(userActions.login({ authHeader, email }));
+    },
+  });
 
   if (isSuccess) {
     closeDialog();
@@ -65,7 +74,7 @@ const LoginDialog = () => {
           ]}
           style={{ columnGap: '1rem' }}
         >
-          <Input type="password" placeholder="Please input your password" style={{ width: '20rem' }} />
+          <Input type="text" placeholder="Please input your password" style={{ width: '20rem' }} />
         </Form.Item>
         {errorMessage}
       </Form>

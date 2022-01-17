@@ -30,7 +30,7 @@ const run = (lightSource: Point, ctx: CanvasRenderingContext2D) => {
 const Visibility2d = () => {
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
 
-  const mouseMove = ({ pageX, pageY }: MouseEvent) => {
+  const mouseMove = ({ pageX, pageY }: React.MouseEvent) => {
     if (ctx) {
       run(new Point(pageX, pageY), ctx);
     }
