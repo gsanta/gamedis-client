@@ -25,14 +25,16 @@ const run = (lightSource: Point, ctx: CanvasRenderingContext2D) => {
   requestAnimationFrame(() => drawScene(ctx, lightSource, blocks, walls, visibility));
 };
 
-// canvas.addEventListener('mousemove', ({ pageX, pageY }) => {
-//   run(new Point(pageX, pageY));
-// });
-
 // run(new Point(100, 100));
 
 const Visibility2d = () => {
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
+
+  const mouseMove = ({ pageX, pageY }: MouseEvent) => {
+    if (ctx) {
+      run(new Point(pageX, pageY), ctx);
+    }
+  };
 
   const ref = useCallback(
     (node) => {
@@ -49,7 +51,7 @@ const Visibility2d = () => {
     [ctx],
   );
 
-  return <canvas ref={ref} width="1800" height="1000"></canvas>;
+  return <canvas ref={ref} width="1800" height="1000" onMouseMove={(e) => mouseMove(e)}></canvas>;
 };
 
 console.log('visibility2d compiled');

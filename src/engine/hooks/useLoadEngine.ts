@@ -1,6 +1,7 @@
 import { Engine, Scene, SceneLoader, ArcRotateCamera, Vector3, HemisphericLight } from 'babylonjs';
 import { Dispatch, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import loadMap, { createTestMap } from '../../game/features/map/loadMap';
 import { RootState } from '../../ui/store';
 import ActionTypes from '../actionTypes';
 import engineStore from '../EngineStore';
@@ -15,6 +16,8 @@ const createScene = function (engine: Engine, canvas: HTMLCanvasElement) {
   const camera = new ArcRotateCamera('camera', -Math.PI / 2, Math.PI / 2.5, 15, new Vector3(0, 0, 0), scene);
   camera.attachControl(canvas, true);
   new HemisphericLight('light', new Vector3(1, 1, 0), scene);
+
+  loadMap(createTestMap());
 
   return scene;
 };
