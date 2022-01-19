@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import SpriteSheetElement from './SpriteSheetElement';
 import SpriteSearch from './SpriteSearch';
+import AlgorithmSearch from '@/components/algorithms/AlgorithmSearch';
 
 const { TabPane } = Tabs;
 
@@ -18,8 +19,8 @@ const SpritePanel = () => {
       <TabPane tab="Library" key="2">
         <SpriteSearch />
       </TabPane>
-      <TabPane tab="Tab 3" key="3">
-        Content of Tab Pane 3
+      <TabPane tab="Algorithms" key="3">
+        <AlgorithmSearch />
       </TabPane>
     </Tabs>
   );

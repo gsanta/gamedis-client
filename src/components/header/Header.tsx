@@ -1,7 +1,7 @@
 import { Button, PageHeader } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../ui/store';
+import { RootState } from '../../store';
 import { userActions } from '../../features/user/userReducer';
 import LoginDialog from '@/components/header/LoginDialog';
 

@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import ReactDOM from 'react-dom';
 import { drawScene } from './drawScene';
 import { loadMap } from './loadMap';
 import Point from './Point';
@@ -30,9 +29,10 @@ const run = (lightSource: Point, ctx: CanvasRenderingContext2D) => {
 const Visibility2d = () => {
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
 
-  const mouseMove = ({ pageX, pageY }: React.MouseEvent) => {
+  const mouseMove = (e: React.MouseEvent) => {
     if (ctx) {
-      run(new Point(pageX, pageY), ctx);
+      const { left, top } = e.currentTarget.getBoundingClientRect();
+      run(new Point(e.clientX - left, e.clientY - top), ctx);
     }
   };
 
@@ -54,6 +54,4 @@ const Visibility2d = () => {
   return <canvas ref={ref} width="1800" height="1000" onMouseMove={(e) => mouseMove(e)}></canvas>;
 };
 
-console.log('visibility2d compiled');
-
-ReactDOM.render(<Visibility2d />, document.getElementById('root'));
+export default Visibility2d;

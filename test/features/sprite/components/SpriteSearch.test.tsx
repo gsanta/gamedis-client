@@ -3,7 +3,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Provider } from 'react-redux';
 import SpriteSearch from '../../../../src/features/sprite/components/SpriteSearch';
-import store from '../../../../src/ui/store';
+import store from '../../../../src/store';
 
 const queryClient = new QueryClient();
 

@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../ui/store';
+import { RootState } from '../../store';
 
 const Notifications = () => {
   const notifications = useSelector((state: RootState) => state.notification.notifications);

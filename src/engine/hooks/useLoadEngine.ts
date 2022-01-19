@@ -2,7 +2,7 @@ import { Engine, Scene, SceneLoader, ArcRotateCamera, Vector3, HemisphericLight 
 import { Dispatch, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import loadMap, { createTestMap } from '../../game/features/map/loadMap';
-import { RootState } from '../../ui/store';
+import { RootState } from '../../store';
 import ActionTypes from '../actionTypes';
 import engineStore from '../EngineStore';
 

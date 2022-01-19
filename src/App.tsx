@@ -5,13 +5,13 @@ import 'react-reflex/styles.css';
 import './app.scss';
 import 'antd/dist/antd.css';
 import './features/sprite/sprite.scss';
-import RenderCanvas from './ui/RenderCanvas';
 import { SidePanel } from './ui/SidePanel';
-import store from './ui/store';
+import store from './store';
 import Notifications from './features/notification/Notifications';
 import Header from './components/header/Header';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
+import Visibility2d from './features/algorithms/visibility_2d/Visibility2d';
 
 const queryClient = new QueryClient();
 
@@ -29,7 +29,7 @@ const App = (): JSX.Element => {
             <ReflexSplitter />
 
             <ReflexElement className="right-pane">
-              <RenderCanvas />
+              <Visibility2d />
             </ReflexElement>
           </ReflexContainer>
           <Notifications />
