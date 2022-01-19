@@ -1,4 +1,4 @@
-import { Sprite } from '../models/Sprite';
+import { Sprite } from '../features/sprite/Sprite';
 
 export interface SpriteReducerState {
   sprites: Sprite[];

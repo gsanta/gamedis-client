@@ -16,7 +16,7 @@ export default class Segment {
   }
 
   get length() {
-    return Math.sqrt(this.p1.x ** 2 + this.p1.y ** 2);
+    return Math.sqrt((this.p1.x - this.p2.x) ** 2 + (this.p1.y - this.p2.y) ** 2);
   }
 
   get center() {

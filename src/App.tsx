@@ -10,8 +10,7 @@ import RenderCanvas from './ui/RenderCanvas';
 import { SidePanel } from './ui/SidePanel';
 import store from './ui/store';
 import Notifications from './features/notification/Notifications';
-import Header from './layout/Header';
-import LoginDialog from './features/login/LoginDialog';
+import Header from './components/header/Header';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -35,7 +34,6 @@ const App = (): JSX.Element => {
             </ReflexElement>
           </ReflexContainer>
           <Notifications />
-          <LoginDialog />
         </Provider>
       </QueryClientProvider>
     </React.StrictMode>

@@ -4,6 +4,10 @@ import Segment from './Segment';
 export default class Rectangle {
   constructor(public x: number, public y: number, public width: number, public height: number) {}
 
+  get center() {
+    return new Point(this.x + this.width / 2, this.y + this.height / 2);
+  }
+
   public getCorners() {
     return {
       nw: new Point(this.x, this.y),

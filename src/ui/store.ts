@@ -4,7 +4,7 @@ import engineReducer from '../engine/engineReducer';
 import loginReducer from '../features/login/loginReducer';
 import notificationReducer from '../features/notification/notificationReducer';
 import spriteReducer from '../reducers/spriteReducer';
-import userReducer from '../user/userReducer';
+import userReducer from '../features/user/userReducer';
 
 const store = configureStore({
   reducer: {

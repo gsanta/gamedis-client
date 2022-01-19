@@ -1,7 +1,7 @@
 import { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios';
 import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
 import apiInstance from '../apiInstance';
-import authStore from '../features/login/authStore';
+import authStore from '../features/user/authStore';
 
 const useApiQuery = <ResponseType, ErrorType>(
   queryKey: QueryKey,
