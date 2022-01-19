@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import engineReducer from '../engine/engineReducer';
-import loginReducer from '../features/login/loginReducer';
 import notificationReducer from '../features/notification/notificationReducer';
 import spriteReducer from '../reducers/spriteReducer';
 import userReducer from '../features/user/userReducer';
@@ -11,7 +10,6 @@ const store = configureStore({
     sprite: spriteReducer,
     engine: engineReducer,
     notification: notificationReducer,
-    login: loginReducer,
     user: userReducer,
   },
 });

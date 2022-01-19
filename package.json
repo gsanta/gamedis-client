@@ -72,9 +72,6 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.1"
   },
-  "moduleNameMapper": {
-    "@/(.*)": "<rootDir>/src/$1"
-  },
   "msw": {
     "workerDirectory": "public"
   }

@@ -1,5 +1,5 @@
+import { LoginResponseDto } from '@/features/user/LoginResponseDto';
 import { rest } from 'msw';
-import { LoginResponseDto } from '../../src/features/login/loginApi';
 import spritesJson from '../jsons/sprites.json';
 
 const token =

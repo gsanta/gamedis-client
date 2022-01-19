@@ -1,5 +1,7 @@
-@import './variables.scss';
-@import './layout/layout.scss';
+@import './components/variables.scss';
+@import './components/layout.scss';
+@import './components/styles.scss';
+
 
 body {
     background-color: white;

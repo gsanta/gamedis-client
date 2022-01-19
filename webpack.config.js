@@ -19,8 +19,6 @@ module.exports = (env) => {
   return {
     entry: {
       app: './src/index.tsx',
-      game: './src/game/index.tsx',
-      Visibility2d: './src/game/features/visibility_2d/Visibility2d.tsx',
     },
     module: {
       rules: [

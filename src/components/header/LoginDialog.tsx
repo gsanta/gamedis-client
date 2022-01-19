@@ -1,9 +1,10 @@
-import TextBlock from '@/layout/TextBlock';
 import { Form, Input, Modal } from 'antd';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import useApiMutation from '../../hooks/useApiMutation';
-import { userActions } from '../../features/user/userReducer';
+import useApiMutation from '@/hooks/useApiMutation';
+import { userActions } from '@/features/user/userReducer';
+import { LoginResponseDto } from '@/features/user/LoginResponseDto';
+import TextBlock from '@/components/building_blocks/TextBlock';
 
 const formItemLayout = {
   labelCol: { span: 4 },
