@@ -57,7 +57,12 @@ const LoginDialog = ({ onClose }: LoginDialogProps) => {
           ]}
           style={{ columnGap: '1rem' }}
         >
-          <Input type="email" placeholder="Please input your email" style={{ width: '20rem' }} />
+          <Input
+            type="email"
+            aria-label="email-input"
+            placeholder="Please input your email"
+            style={{ width: '20rem' }}
+          />
         </Form.Item>
         <Form.Item
           {...formItemLayout}
