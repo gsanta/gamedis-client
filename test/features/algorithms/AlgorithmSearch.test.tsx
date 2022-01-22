@@ -13,6 +13,6 @@ describe('Component: AlgorithmSearch', () => {
     );
 
     const displayedTasks = await screen.findByTestId('algorithm-item');
-    expect(displayedTasks.textContent).toBe('2d visibility ');
+    expect(displayedTasks.textContent).toBe('2d visibility');
   });
 });

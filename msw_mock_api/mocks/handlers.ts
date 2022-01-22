@@ -1,4 +1,4 @@
-import { LoginResponseDto } from '@/features/user/LoginResponseDto';
+import { LoginResponseDto } from '@/features/auth/LoginResponseDto';
 import { rest } from 'msw';
 import spritesJson from '../jsons/sprites.json';
 

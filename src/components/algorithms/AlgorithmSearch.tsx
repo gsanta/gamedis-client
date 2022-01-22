@@ -1,11 +1,11 @@
-import { RootState } from '@/store';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { globalContext } from '@/globalContext';
+import { observer } from 'mobx-react-lite';
+import React, { useContext } from 'react';
 
-const selectAlgorithms = (state: RootState) => state.algorithm;
-
-const AlgorithmSearch = () => {
-  const { algorithms } = useSelector(selectAlgorithms);
+const AlgorithmSearch = observer(() => {
+  const {
+    algStore: { algorithms },
+  } = useContext(globalContext);
 
   const result = (
     <>
@@ -18,6 +18,6 @@ const AlgorithmSearch = () => {
   );
 
   return <div>{result}</div>;
-};
+});
 
 export default AlgorithmSearch;

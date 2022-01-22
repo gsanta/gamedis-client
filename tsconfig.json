@@ -34,7 +34,8 @@
     "allowUnreachableCode": false,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "useDefineForClassFields": true
   },
   "include": [
     ".eslintrc.js",

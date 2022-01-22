@@ -1,10 +1,10 @@
-import { Form, Input, Modal } from 'antd';
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import useApiMutation from '@/hooks/useApiMutation';
-import { userActions } from '@/features/user/userReducer';
-import { LoginResponseDto } from '@/features/user/LoginResponseDto';
 import TextBlock from '@/components/building_blocks/TextBlock';
+import { LoginResponseDto } from '@/features/auth/LoginResponseDto';
+import { globalContext } from '@/globalContext';
+import useApiMutation from '@/hooks/useApiMutation';
+import { Form, Input, Modal } from 'antd';
+import { observer } from 'mobx-react-lite';
+import React, { useContext } from 'react';
 
 const formItemLayout = {
   labelCol: { span: 4 },
@@ -15,16 +15,15 @@ type LoginDialogProps = {
   onClose(): void;
 };
 
-const LoginDialog = ({ onClose }: LoginDialogProps) => {
-  const dispatch = useDispatch();
+const LoginDialog = observer(({ onClose }: LoginDialogProps) => {
   const [form] = Form.useForm();
+  const { authStore } = useContext(globalContext);
 
   const { mutate, error } = useApiMutation<LoginResponseDto>('v1/auth/login', 'post', {
     onSuccess(data) {
       const authHeader = data?.headers.authorization;
       const { email } = data?.data?.data?.attributes;
-
-      dispatch(userActions.login({ authHeader, email }));
+      authStore.login(email, authHeader);
       onClose();
     },
   });
@@ -82,6 +81,6 @@ const LoginDialog = ({ onClose }: LoginDialogProps) => {
       </Form>
     </Modal>
   );
-};
+});
 
 export default LoginDialog;

@@ -12,29 +12,32 @@ import Header from './components/header/Header';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Visibility2d from './features/algorithms/visibility_2d/Visibility2d';
+import { globalContext, globalContextState } from './globalContext';
 
 const queryClient = new QueryClient();
 
 const App = (): JSX.Element => {
   return (
     <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <Header />
-          <ReflexContainer orientation="vertical" style={{ height: 'calc(100% - 51px)' }}>
-            <ReflexElement className="left-pane">
-              <SidePanel />
-            </ReflexElement>
+      <globalContext.Provider value={globalContextState}>
+        <QueryClientProvider client={queryClient}>
+          <Provider store={store}>
+            <Header />
+            <ReflexContainer orientation="vertical" style={{ height: 'calc(100% - 51px)' }}>
+              <ReflexElement className="left-pane">
+                <SidePanel />
+              </ReflexElement>
 
-            <ReflexSplitter />
+              <ReflexSplitter />
 
-            <ReflexElement className="right-pane">
-              <Visibility2d />
-            </ReflexElement>
-          </ReflexContainer>
-          <Notifications />
-        </Provider>
-      </QueryClientProvider>
+              <ReflexElement className="right-pane">
+                <Visibility2d />
+              </ReflexElement>
+            </ReflexContainer>
+            <Notifications />
+          </Provider>
+        </QueryClientProvider>
+      </globalContext.Provider>
     </React.StrictMode>
   );
 };

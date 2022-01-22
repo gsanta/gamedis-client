@@ -1,27 +1,24 @@
-import { Button, PageHeader } from 'antd';
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { userActions } from '../../features/user/userReducer';
 import LoginDialog from '@/components/header/LoginDialog';
+import { globalContext } from '@/globalContext';
+import { Button, PageHeader } from 'antd';
+import { observer } from 'mobx-react-lite';
+import React, { useContext, useState } from 'react';
 
-const selectUser = (state: RootState) => state.user;
-
-const Header = () => {
-  const { auth } = useSelector(selectUser);
-  const dispatch = useDispatch();
+const Header = observer(() => {
   const [isLoginDialogOpen, setLoginDialogOpen] = useState(false);
-  const logout = () => dispatch(userActions.logout());
+  const {
+    authStore: { logout, email, isLoggedIn },
+  } = useContext(globalContext);
 
   const loggedInHeader = (
     <>
-      Hi {auth?.email}! <Button onClick={logout}>Log out</Button>
+      Hi {email}! <Button onClick={logout}>Log out</Button>
     </>
   );
 
   const loggedOutHeader = <Button onClick={() => setLoginDialogOpen(true)}>Log in</Button>;
 
-  const login = auth?.token ? loggedInHeader : loggedOutHeader;
+  const login = isLoggedIn ? loggedInHeader : loggedOutHeader;
 
   return (
     <>
@@ -29,6 +26,6 @@ const Header = () => {
       {isLoginDialogOpen ? <LoginDialog onClose={() => setLoginDialogOpen(false)} /> : null}
     </>
   );
-};
+});
 
 export default Header;
