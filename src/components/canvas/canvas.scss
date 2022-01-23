@@ -1,0 +1,15 @@
+
+
+.canvas {
+  position: relative;
+}
+
+.canvas__toolbar {
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  width: 100px;
+  height: 30px;
+  background-color: red;
+  width: calc(100% - 2rem);
+}

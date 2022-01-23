@@ -13,6 +13,7 @@ import Header from './components/header/Header';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Visibility2d from './features/algorithms/visibility_2d/Visibility2d';
 import { globalContext, globalContextState } from './globalContext';
+import Canvas from './components/canvas/Canvas';
 
 const queryClient = new QueryClient();
 
@@ -24,14 +25,16 @@ const App = (): JSX.Element => {
           <Provider store={store}>
             <Header />
             <ReflexContainer orientation="vertical" style={{ height: 'calc(100% - 51px)' }}>
-              <ReflexElement className="left-pane">
+              <ReflexElement flex={0.2} className="left-pane">
                 <SidePanel />
               </ReflexElement>
 
               <ReflexSplitter />
 
               <ReflexElement className="right-pane">
-                <Visibility2d />
+                <Canvas>
+                  <Visibility2d />
+                </Canvas>
               </ReflexElement>
             </ReflexContainer>
             <Notifications />

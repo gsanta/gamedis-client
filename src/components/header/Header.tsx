@@ -22,7 +22,7 @@ const Header = observer(() => {
 
   return (
     <>
-      <PageHeader className="site__header" onBack={() => null} title="Game Designer" extra={login}></PageHeader>;
+      <PageHeader className="site__header" onBack={() => null} title="Game Designer" extra={login}></PageHeader>
       {isLoginDialogOpen ? <LoginDialog onClose={() => setLoginDialogOpen(false)} /> : null}
     </>
   );
