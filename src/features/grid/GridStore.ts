@@ -1,14 +1,24 @@
-import { makeObservable, observable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 
 export default class GridStore {
   gridSize = 20;
 
-  showGrid = false;
+  private _isGridVisible = false;
+
+  get isGridVisible() {
+    return this._isGridVisible;
+  }
+
+  setGridVisible = (isVisible: boolean) => {
+    this._isGridVisible = isVisible;
+  };
 
   constructor() {
-    makeObservable(this, {
+    makeObservable<GridStore, '_isGridVisible'>(this, {
       gridSize: observable,
-      showGrid: observable,
+      _isGridVisible: observable,
+      isGridVisible: computed,
+      setGridVisible: action,
     });
   }
 }

@@ -11,7 +11,6 @@ import Notifications from './features/notification/Notifications';
 import Header from './components/header/Header';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
-import Visibility2d from './features/algorithms/visibility_2d/Visibility2d';
 import { globalContext, globalContextState } from './globalContext';
 import Canvas from './components/canvas/Canvas';
 
@@ -32,9 +31,7 @@ const App = (): JSX.Element => {
               <ReflexSplitter />
 
               <ReflexElement className="right-pane">
-                <Canvas>
-                  <Visibility2d />
-                </Canvas>
+                <Canvas />
               </ReflexElement>
             </ReflexContainer>
             <Notifications />

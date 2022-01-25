@@ -1,7 +1,7 @@
-import EndPoint from './EndPoint';
-import Point from './Point';
-import Rectangle from './Rectangle';
-import Segment from './Segment';
+import EndPoint from '../algorithms/visibility_2d/EndPoint';
+import Point from '../algorithms/visibility_2d/Point';
+import Rectangle from '../algorithms/visibility_2d/Rectangle';
+import Segment from '../algorithms/visibility_2d/Segment';
 
 const calculateEndPointAngles = (lightSource: Point, segment: Segment) => {
   const { x, y } = lightSource;
