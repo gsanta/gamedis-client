@@ -35,7 +35,7 @@ const Canvas = () => {
   };
 
   return (
-    <div className="canvas">
+    <div className="panel__main">
       <Toolbar />
       <canvas
         className="canvas__canvas"

@@ -1,12 +1,9 @@
 
 
-.canvas {
+.panel__main {
   position: relative;
-}
-
-.canvas__canvas {
-  width: 1800px;
-  height: 500px;
+  height: 100%;
+  width: 100%;
 }
 
 .canvas__toolbar {
