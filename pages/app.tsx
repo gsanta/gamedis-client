@@ -1,22 +1,22 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ReflexContainer, ReflexElement, ReflexSplitter } from 'react-reflex';
-import 'react-reflex/styles.css';
-import './app.scss';
-import 'antd/dist/antd.css';
-import './features/sprite/sprite.scss';
-import { SidePanel } from './ui/SidePanel';
-import store from './store';
-import Notifications from './features/notification/Notifications';
-import Header from './components/header/Header';
-
+import { SidePanel } from '../src/ui/SidePanel';
+import store from '../src/store';
+import Notifications from '../src/features/notification/Notifications';
+import Header from '../src/components/header/Header';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { globalContext, globalContextState } from './globalContext';
-import Canvas from './components/canvas/Canvas';
+import { globalContext, globalContextState } from '../src/globalContext';
+import Canvas from '../src/components/canvas/Canvas';
+import useAuthFromLocalStorage from '@/features/auth/useAuthFromLocalStorage';
 
 const queryClient = new QueryClient();
 
 const App = (): JSX.Element => {
+  console.log('In App');
+
+  useAuthFromLocalStorage();
+
   return (
     <React.StrictMode>
       <globalContext.Provider value={globalContextState}>
@@ -40,6 +40,25 @@ const App = (): JSX.Element => {
       </globalContext.Provider>
     </React.StrictMode>
   );
+};
+
+App.getInitialProps = async ({ req }: any) => {
+  console.log('app.getinitialprops');
+  // use
+  // let token;
+  // if (req) {
+  //   // server
+  //   return { page: {} };
+  // } else {
+  //   // client
+  //   const token = localStorage.getItem("auth");
+  //   const res = await fetch(`${process.env.API_URL}/pages/about`, {
+  //     headers: { Authorization: token },
+  //   });
+  //   const data = await res.json();
+  //   return { page: data };
+  // }
+  return {};
 };
 
 export default App;

@@ -1,7 +1,6 @@
 import Point from '@/features/algorithms/visibility_2d/Point';
 import { globalContext } from '@/globalContext';
 import React, { useCallback, useContext, useState } from 'react';
-import './canvas.scss';
 import Toolbar from './Toolbar';
 
 const Canvas = () => {
