@@ -1,3 +1,4 @@
+import Shape from '@/model/Shape';
 import { drawScene } from '../algorithms/visibility_2d/drawScene';
 import Point from '../algorithms/visibility_2d/Point';
 import Rectangle from '../algorithms/visibility_2d/Rectangle';
@@ -15,6 +16,8 @@ const walls = [
 const blocks = [new Rectangle(50, 150, 20, 20), new Rectangle(150, 150, 40, 80), new Rectangle(400, 400, 40, 40)];
 
 export default class CanvasStore {
+  shapes: Shape[] = [];
+
   private _mousePosition: Point = new Point(100, 100);
 
   private ctx: CanvasRenderingContext2D | undefined;
