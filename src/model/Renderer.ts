@@ -1,7 +1,7 @@
-import Shape from './Shape';
+import View from './View';
 
 interface Renderer {
-  addShape(shape: Shape);
+  addView(view: View): void;
 }
 
 export default Renderer;

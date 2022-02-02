@@ -3,6 +3,7 @@ import { Tabs } from 'antd';
 import SpriteSheetElement from './SpriteSheetElement';
 import SpriteSearch from './SpriteSearch';
 import AlgorithmSearch from '@/components/algorithms/AlgorithmSearch';
+import Palette from '@/features/palette/Palette';
 
 const { TabPane } = Tabs;
 
@@ -14,7 +15,7 @@ const SpritePanel = () => {
   return (
     <Tabs defaultActiveKey="1" onChange={callback}>
       <TabPane tab="Sprites" key="1">
-        <SpriteSheetElement />
+        <Palette />
       </TabPane>
       <TabPane tab="Library" key="2">
         <SpriteSearch />

@@ -8,17 +8,17 @@ export default class Rectangle {
     return new Point(this.x + this.width / 2, this.y + this.height / 2);
   }
 
-  public getCorners() {
-    return {
-      nw: new Point(this.x, this.y),
-      sw: new Point(this.x, this.y + this.height),
-      ne: new Point(this.x + this.width, this.y),
-      se: new Point(this.x + this.width, this.y + this.height),
-    };
+  public getPoints() {
+    return [
+      new Point(this.x, this.y),
+      new Point(this.x, this.y + this.height),
+      new Point(this.x + this.width, this.y),
+      new Point(this.x + this.width, this.y + this.height),
+    ];
   }
 
   public getCornerSegments(): Segment[] {
-    const { nw, sw, ne, se } = this.getCorners();
+    const [nw, sw, ne, se] = this.getPoints();
     return [
       new Segment(nw.x, nw.y, ne.x, ne.y),
       new Segment(nw.x, nw.y, sw.x, sw.y),

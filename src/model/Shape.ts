@@ -1,4 +1,5 @@
 import Point from '../features/algorithms/visibility_2d/Point';
+import RectShape from './RectShape';
 import ShapeType from './ShapeType';
 
 class Shape {
@@ -15,5 +16,9 @@ class Shape {
     return this._points;
   }
 }
+
+export const isRectShape = (shape: Shape): shape is RectShape => {
+  return shape.type === ShapeType.Rectangle;
+};
 
 export default Shape;
