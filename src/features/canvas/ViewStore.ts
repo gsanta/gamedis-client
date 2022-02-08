@@ -1,18 +1,18 @@
-import Renderer from '@/model/Renderer';
 import View from '@/model/View';
+import MeshStore from './rendering/MeshStore';
 
 export default class ViewStore {
   views: View[] = [];
 
-  private renderer: Renderer | undefined;
+  private meshStore: MeshStore | null = null;
 
   addView(view: View): void {
     this.views.push(view);
-    this.renderer?.addView(view);
+    this.meshStore?.addView(view);
   }
 
-  setRenderer(renderer: Renderer) {
-    this.renderer = renderer;
-    this.views.forEach((view) => renderer.addView(view));
+  setMeshStore(meshStore: MeshStore) {
+    this.meshStore = meshStore;
+    this.views.forEach((view) => meshStore.addView(view));
   }
 }

@@ -8,10 +8,27 @@
 
 .canvas__toolbar {
   position: absolute;
+  display: flex;
+  gap: 1rem;
   top: 0.5rem;
   left: 1rem;
   width: 100px;
-  height: 30px;
-  background-color: red;
+  height: 2.5rem;
+  padding: 3px;
+  background-color: rgba($color: (#FFFFFF), $alpha: 0.5);
+  // opacity: 0.5;
   width: calc(100% - 2rem);
+}
+
+.canvas__canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.tool {
+  cursor: pointer;
+}
+
+.tool--active {
+  background-color: green;
 }

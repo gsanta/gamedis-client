@@ -1,9 +1,25 @@
 import { globalContext } from '@/globalContext';
+import { Tool } from '@/model/canvas/Tool';
 import { Button, Checkbox, Dropdown, Menu } from 'antd';
+import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useState } from 'react';
+import { RenderingContext } from './RendererProvider';
+
+const getTool = (tool: Tool, activeTool: Tool | null, setActiveTool: (tool: Tool) => void) => {
+  const toolClassName = classNames('tool', {
+    'tool--active': activeTool === tool,
+  });
+
+  return (
+    <div className={toolClassName} onClick={() => setActiveTool(tool)}>
+      {tool.toolName}
+    </div>
+  );
+};
 
 const Toolbar = observer(() => {
+  const { toolStore } = useContext(RenderingContext);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const {
     gridStore: { isGridVisible, setGridVisible },
@@ -29,6 +45,10 @@ const Toolbar = observer(() => {
     </Menu>
   );
 
+  const setActiveTool = (tool: Tool | null) => {
+    toolStore.setActiveTool(tool);
+  };
+
   return (
     <div className="canvas__toolbar">
       <Dropdown
@@ -40,6 +60,9 @@ const Toolbar = observer(() => {
       >
         <Button>Canvas</Button>
       </Dropdown>
+
+      {getTool(toolStore.moveTool, toolStore.activeTool, setActiveTool)}
+      {getTool(toolStore.createTool, toolStore.activeTool, setActiveTool)}
     </div>
   );
 });

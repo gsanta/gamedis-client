@@ -1,18 +1,18 @@
+import Point from '@/features/algorithms/visibility_2d/Point';
 import Rectangle from '@/features/algorithms/visibility_2d/Rectangle';
 import Shape from './Shape';
 import ShapeType from './ShapeType';
 
 class RectShape extends Shape {
-  private _rect: Rectangle;
+  readonly center;
 
-  constructor(rectangle: Rectangle) {
-    super(rectangle.getPoints(), ShapeType.Rectangle);
+  readonly size;
 
-    this._rect = rectangle;
-  }
+  constructor(center: Point, size: number) {
+    super([center], ShapeType.Rectangle);
 
-  get rect() {
-    return this._rect;
+    this.center = center;
+    this.size = size;
   }
 }
 

@@ -12,7 +12,9 @@ const Header = observer(() => {
 
   const loggedInHeader = (
     <>
-      Hi {email}! <Button onClick={logout}>Log out</Button>
+      <span>
+        Hi {email}! <Button onClick={logout}>Log out</Button>
+      </span>
     </>
   );
 
