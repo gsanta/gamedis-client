@@ -1,26 +1,31 @@
-import EngineStore from '@/engine/EngineStore';
-import MeshStore from '@/features/canvas/rendering/MeshStore';
-import ViewStore from '@/features/canvas/ViewStore';
 import { action, makeObservable, observable } from 'mobx';
-import CreateTool from './CreateTool';
-import MoveTool from './MoveTool';
-import { Tool } from './Tool';
+import { Tool, ToolType } from './Tool';
 
 export default class ToolStore {
-  moveTool: MoveTool;
-
-  createTool: CreateTool;
-
   activeTool: Tool | null = null;
 
-  constructor(engineStore: EngineStore, meshStore: MeshStore, viewStore: ViewStore) {
-    this.moveTool = new MoveTool(engineStore, meshStore);
-    this.createTool = new CreateTool(engineStore, viewStore, meshStore);
+  tools: Tool[] = [];
 
+  constructor() {
     makeObservable(this, {
+      addTool: action,
       activeTool: observable,
+      getTools: observable,
       setActiveTool: action,
+      tools: observable,
     });
+  }
+
+  addTool(tool: Tool) {
+    this.tools.push(tool);
+  }
+
+  getTool(toolType: ToolType): Tool | undefined {
+    return this.tools.find((tool) => tool.toolType === toolType);
+  }
+
+  getTools(): Tool[] {
+    return this.tools;
   }
 
   setActiveTool(tool: Tool | null) {

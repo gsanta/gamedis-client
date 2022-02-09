@@ -1,20 +1,18 @@
 import { Camera, Engine, Scene } from 'babylonjs';
-import { makeObservable, observable } from 'mobx';
 
 export default class EngineStore {
-  isLoaded = false;
+  engine: Engine;
 
-  engine: Engine | null = null;
+  scene: Scene;
 
-  scene: Scene | null = null;
+  canvas: HTMLCanvasElement;
 
-  canvas: HTMLCanvasElement | null = null;
+  camera: Camera;
 
-  camera: Camera | null = null;
-
-  constructor() {
-    makeObservable(this, {
-      isLoaded: observable,
-    });
+  constructor(engine: Engine, scene: Scene, canvas: HTMLCanvasElement, camera: Camera) {
+    this.engine = engine;
+    this.scene = scene;
+    this.canvas = canvas;
+    this.camera = camera;
   }
 }

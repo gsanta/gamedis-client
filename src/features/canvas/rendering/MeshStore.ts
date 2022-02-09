@@ -3,22 +3,24 @@ import ViewMover from '@/model/canvas/ViewMover';
 import Renderer from '@/model/Renderer';
 import { isRectShape } from '@/model/Shape';
 import View from '@/model/View';
-import { Mesh, MeshBuilder, Space, Axis } from 'babylonjs';
+import { Mesh, MeshBuilder, Space, Axis, StandardMaterial } from 'babylonjs';
 import { Application } from 'pixi.js';
+import MaterialStore from './MaterialStore';
 
 class PixieRenderer implements Renderer {
   app: Application;
 
   private engineStore: EngineStore;
 
+  private materialStore: MaterialStore;
+
   private meshes: Map<View, Mesh> = new Map();
 
   ground: Mesh | null = null;
 
-  private movers: Map<Mesh, ViewMover> = new Map();
-
-  constructor(engineStore: EngineStore) {
+  constructor(engineStore: EngineStore, materialStore: MaterialStore) {
     this.engineStore = engineStore;
+    this.materialStore = materialStore;
     this.app = new Application({ width: 640, height: 360 });
     this.app.stage.interactive = true;
   }
@@ -40,7 +42,10 @@ class PixieRenderer implements Renderer {
     const { scene } = this.engineStore;
     if (isRectShape(shape)) {
       const mesh = MeshBuilder.CreateDisc('disc', { tessellation: 4 }, scene);
-      mesh.translate(Axis.Z, 1, Space.WORLD);
+      mesh.material = this.materialStore.blue1;
+      mesh.translate(Axis.Z, -1, Space.WORLD);
+      mesh.translate(Axis.X, shape.center.x, Space.WORLD);
+      mesh.translate(Axis.Y, shape.center.y, Space.WORLD);
       return mesh;
     }
 
