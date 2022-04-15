@@ -1,31 +1,9 @@
-@import './components/variables.scss';
-@import './components/layout.scss';
-@import './components/styles.scss';
-
-
 body {
     background-color: white;
     font-family: 'Roboto', sans-serif;
-    // margin: 0;
-    // box-sizing: border-box;
 }
 
 #root {
-    width: 100%;
-    height: 100%;
-}
-
-#renderCanvas {
-    width: 100%;
-    height: 100%;
-    touch-action: none;
-}
-
-.pane__side {
-    padding: $size--x2;
-}
-
-#__next {
     width: 100%;
     height: 100%;
 }

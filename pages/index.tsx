@@ -1,6 +1,5 @@
-
 const Index = (): JSX.Element => {
-  return <>Index page</>
-}
+  return <>Index page</>;
+};
 
 export default Index;
